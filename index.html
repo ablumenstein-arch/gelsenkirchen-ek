@@ -87,7 +87,7 @@ input[aria-invalid="true"] { color: var(--neg); }
 .schalter input { width: 16px; height: 16px; accent-color: var(--accent); }
 input[type="range"] { width: 100%; accent-color: var(--accent); }
 .knoepfe { display: flex; flex-wrap: wrap; gap: 6px; }
-.quote { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.quote { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
 .quote button { font-family: var(--f-head); font-weight: 600; font-size: 16px; padding: 10px 0; }
 .quote button[aria-pressed="true"] { background: var(--accent); color: var(--panel); border-color: var(--accent); }
 button {
@@ -261,7 +261,8 @@ a.oeffnen:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
           <input type="range" hidden id="ekRegler" min="0" max="135000" step="500" value="0" aria-label="Zusätzliches Eigenkapital als Regler">
           <div class="feld"><label>Eigenkapitalquote</label></div>
           <div class="quote" id="ekQuote" role="group" aria-label="Eigenkapitalquote">
-            <button type="button" data-q="10" aria-pressed="true">10 %</button>
+            <button type="button" data-q="0" aria-pressed="true">0 %</button>
+            <button type="button" data-q="10" aria-pressed="false">10 %</button>
             <button type="button" data-q="20" aria-pressed="false">20 %</button>
             <button type="button" data-q="30" aria-pressed="false">30 %</button>
           </div>
@@ -1019,7 +1020,7 @@ REITER.forEach(([t]) => $(t).addEventListener("click", () => {
   REITER.forEach(([t2, p2]) => { $(t2).setAttribute("aria-selected", t2 === t ? "true" : "false"); $(p2).hidden = t2 !== t; });
 }));
 
-let EKQ = 10;
+let EKQ = 0;
 $("ekQuote").addEventListener("click", ev => {
   const b = ev.target.closest("button"); if (!b) return;
   EKQ = Number(b.dataset.q);
